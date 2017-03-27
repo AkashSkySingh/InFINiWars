@@ -1,4 +1,4 @@
-## Conway's Game of Life with Variations
+## InFINiWars: Space Invader Variation
 
 ### Background
 
