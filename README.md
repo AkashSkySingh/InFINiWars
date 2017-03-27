@@ -28,7 +28,7 @@ In addition, this project will include:
 
 This app will consist of a single screen with game canvas, game controls, and nav links to the Github, my LinkedIn, and the About modal.  Game controls will include Start, Reset, and mute buttons.  On the left, there will be lore about the game, as well as the momvement schema.  On the right, there will be a livefeed for user progress, as well as the button overlay for features mentioned above.  Additionally, the game will have a modal  appear prompting to continue game.
 
-![wireframes](images/wireframes/InFINiWars.png)
+![wireframes](./images/wireframes/InFINiWars.png)
 
 ### Architecture and Technologies
 
