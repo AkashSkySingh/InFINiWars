@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/AkashSkySingh/InFINiWars/issues"
   },
-  "homepage": "https://github.com/AkashSkySingh/InFINiWars#readme"
+  "homepage": "https://github.com/AkashSkySingh/InFINiWars#readme",
+  "dependencies": {
+    "webpack": "^2.3.2"
+  }
 }
