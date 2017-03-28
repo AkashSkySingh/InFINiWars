@@ -2,11 +2,13 @@
 
 ### Background
 
-InFINiWars is at its core the game of **Space Invaders**.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score. To bring **Space Invaders** into the modern era, InFINiWars will:
+InFINiWars is at its core the game of **Space Invaders**.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score.
 
-1) Increase in difficulty by speed and wave intervals like the original game,
-2) Limit the user on ammo as they progress level to level,
-3) Eventually, requiring a player to combo attacks to win.
+In future developments, I plan to bring **Space Invaders** into the modern era by:
+
+1. An increase in difficulty by speed and wave intervals,
+2. Limiting the user on ammo as they progress level to level,
+3. Eventually, requiring a player to combo attacks to win.
 
 There are many variations on the **Space Invaders**.  This simulation will incorporate several of those variations, outlined in the **Functionality & MVP** and **Bonus Features** sections.
 
@@ -15,8 +17,8 @@ There are many variations on the **Space Invaders**.  This simulation will incor
 With this **Space Invaders** simulator, users will be able to:
 
 - [ ] Start, mute, and reset the game board
-- [ ] Move their "spacecraft" for dynamic movement
-- [ ] Return  fire to enemies, and see dynamic feedback
+- [ ] Move "spacecraft" and fire at enemies
+- [ ] "Invaders" which move towards "spacecraft"
 - [ ] See their score and levels complete
 
 In addition, this project will include:
@@ -55,7 +57,6 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 - Get a green bundle with `webpack`
 - Learn enough `Easel.js` to render an object to the `Canvas` element
-- Plan out potential parameters for game difficulty progression
 
 **Day 2**: Dedicate this day to learning the `Easel.js` API.  First, build out the various `Canvas` related objects.  Then, render at least one form of game to test general layout of game status. One working level should allow for bug testing of overall code. Goals for the day:
 
@@ -63,9 +64,10 @@ In addition to the webpack entry file, there will be three scripts involved in t
 - Begin styling and work on game state storage
 - Get at least one working level with starting parameters
 
-**Day 3**: Create the remaining parameters to levels and test user experience. Complete styling of `Game` with working sound experience and functionality. Goals are to:
+**Day 3**: Create the remaining parameters to the game. Complete styling of `Game` with working sound experience and functionality. Goals are to:
 
 - Verify sound functions as intended
+- Verify button, modal prompt, and game functionality
 - Verify natural game progression for better user experience
 
 **Day 4**: Finish styling and bug testing. Verify potential errors and design flaws for rapid improvement. Find a natural limit for game progression.
@@ -75,6 +77,6 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 There are many directions this **Space Invaders** replica could eventually go.  Some anticipated updates are:
 
+- [ ] Increasing movement and fire-back rate from "Invaders"
 - [ ] Add options for different modes and player-limitations
-- [ ] Add dynamic enemy movement and reponse fire
-- [ ] Introduce dynamic canvas schemes (e.g. every level progresses in color palette and functionality, so retro to modern gameplay)
+- [ ] Introduce dynamic canvas schemes from retro to modern
