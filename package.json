@@ -1,0 +1,23 @@
+{
+  "name": "InFINiWars",
+  "version": "1.0.0",
+  "description": "InFINiWars is at its core the game of **Space Invaders**.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score.",
+  "main": "webpack.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AkashSkySingh/InFINiWars.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AkashSkySingh/InFINiWars/issues"
+  },
+  "homepage": "https://github.com/AkashSkySingh/InFINiWars#readme"
+}

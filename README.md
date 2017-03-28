@@ -16,10 +16,10 @@ There are many variations on the **Space Invaders**.  This simulation will incor
 
 With this **Space Invaders** simulator, users will be able to:
 
-- [ ] Start, mute, and reset the game board
+- [ ] Start and reset the game board
 - [ ] Move "spacecraft" and fire at enemies
 - [ ] "Invaders" which move towards "spacecraft"
-- [ ] See their score and levels complete
+- [ ] See their score and and hear sounds
 
 In addition, this project will include:
 
@@ -30,7 +30,7 @@ In addition, this project will include:
 
 This app will consist of a single screen with game canvas, game controls, and nav links to the Github, my LinkedIn, and the About modal.  Game controls will include Start, Reset, and mute buttons.  On the left, there will be lore about the game, as well as the momvement schema.  On the right, there will be a livefeed for user progress, as well as the button overlay for features mentioned above.  Additionally, the game will have a modal  appear prompting to continue game.
 
-![wireframes](./images/Wireframes/InFINiWars.png)
+![wireframes](./docs/wireframes/InFINiWarsß.png)
 
 ### Architecture and Technologies
 
@@ -41,13 +41,17 @@ This project will be implemented with the following technologies:
 - `jQuery Hotkeys Plugin` for cross-browser key handling.
 - Webpack to bundle and serve up the various scripts.
 
-In addition to the webpack entry file, there will be three scripts involved in this project:
+In addition to the webpack entry file, there will be six scripts involved in this project:
 
-`Canvas.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
+`Infiniwars.js`: this script will handle the logic for creating and updating the necessary `Easel.js` and `Canvas.js` elements and rendering them to the DOM. `Game.js` also handles `Sound.js` elements.
 
-`Spacecraft.js`: this script will handle the logic behind the scenes.  A Spacecraft object will use a Projectile and movement.
+`Spacecraft.js`: this script will handle the logic behind the scenes.  A Spacecraft object will use a Projectile and its own movement scheme.
 
-`Collision_projectile.js`: this script with be in charge of handling projectile collision. In essence, the projects from the ship as well as enemy objects.
+`Invader.js`: this script will be the enemy object displayed on render and their related actions. An Invader will also use Projectile and its own movement scheme.
+
+`Projectile.js`: this script is the projectile or bullet being shot out of enemies and spacecraft. This will be bound to movements and/or actions done by Spacecraft.
+
+`Collision.js`: this script with be in charge of handling collision. In essence, the projects from the ship as well as enemy objects.
 
 `Game_status.js`: this script  will house the necessary variables to provide feedback to user, as well as the prompts for game play.
 
@@ -77,6 +81,7 @@ In addition to the webpack entry file, there will be three scripts involved in t
 
 There are many directions this **Space Invaders** replica could eventually go.  Some anticipated updates are:
 
+- [ ] Get realtime feedback for scores and wave clears
 - [ ] Increasing movement and fire-back rate from "Invaders"
 - [ ] Add options for different modes and player-limitations
 - [ ] Introduce dynamic canvas schemes from retro to modern
