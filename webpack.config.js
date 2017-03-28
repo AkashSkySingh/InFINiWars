@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  entry: './lib/main.js',
+  entry: './lib/inifiniwars.js',
   output: {
     filename: './assets/javascripts/bundle.js'
   },

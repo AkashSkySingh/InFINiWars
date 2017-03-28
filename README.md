@@ -38,12 +38,12 @@ This project will be implemented with the following technologies:
 
 - Vanilla JavaScript and `jquery` for overall structure and game logic,
 - `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering,
-- `jQuery Hotkeys Plugin` for cross-browser key handling.
+- `Sound.js` to handle sound rendering on collisions, and
 - Webpack to bundle and serve up the various scripts.
 
 In addition to the webpack entry file, there will be six scripts involved in this project:
 
-`Infiniwars.js`: this script will handle the logic for creating and updating the necessary `Easel.js` and `Canvas.js` elements and rendering them to the DOM. `Game.js` also handles `Sound.js` elements.
+`Game.js`: this script will handle the logic for creating and updating the necessary `Easel.js` and `Canvas.js` elements and rendering them to the DOM. `Game.js` also handles `Sound.js` elements.
 
 `Spacecraft.js`: this script will handle the logic behind the scenes.  A Spacecraft object will use a Projectile and its own movement scheme.
 
