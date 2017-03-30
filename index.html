@@ -3,12 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title>InFINiWars</title>
+    <link rel="stylesheet" href="./assets/stylesheets/infiniwars.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Revalia" rel="stylesheet">
     <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
   </head>
   <body>
   <!-- Canvas below has set paramters via Game  but requires set height due to default value-->
-    <canvas id="infiniwars" width="450" height="700"></canvas>
-    <script type="application/javascript" src="./assets/javascripts/bundle.js"></script>
+    <div id="root">
+      <div class="text-field">
+        <h1>InFINiWars!</h1>
+        <canvas id="infiniwars"></canvas>
+      </div>
+
+
+      <script type="application/javascript" src="./assets/javascripts/bundle.js"></script>
+    </div>
 
   </body>
 </html>

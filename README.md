@@ -19,11 +19,10 @@ With this **Space Invaders** simulator, users will be able to:
 - [ ] Start and reset the game board
 - [ ] Move "spacecraft" and fire at enemies
 - [ ] "Invaders" which move towards "spacecraft"
-- [ ] See their score and and hear sounds
+- [ ] See their score
 
 In addition, this project will include:
 
-- [ ] A progress/level modal allowing the user move amp  up the difficulty/progress
 - [ ] A production Readme
 
 ### Wireframes
@@ -43,7 +42,9 @@ This project will be implemented with the following technologies:
 
 In addition to the webpack entry file, there will be six scripts involved in this project:
 
-`Game.js`: this script will handle the logic for creating and updating the necessary `Easel.js` and `Canvas.js` elements and rendering them to the DOM. `Game.js` also handles `Sound.js` elements.
+`Game.js`: this script will handle the logic for creating and updating the necessary `Easel.js` and `Canvas.js` elements and rendering them to the DOM.
+
+`Game_view.js`: this script will handle the keybinding actions of relevant objects and the animation cycle of the game itself.
 
 `Spacecraft.js`: this script will handle the logic behind the scenes.  A Spacecraft object will use a Projectile and its own movement scheme.
 
@@ -51,9 +52,11 @@ In addition to the webpack entry file, there will be six scripts involved in thi
 
 `Projectile.js`: this script is the projectile or bullet being shot out of enemies and spacecraft. This will be bound to movements and/or actions done by Spacecraft.
 
-`Collision.js`: this script with be in charge of handling collision. In essence, the projects from the ship as well as enemy objects.
+`Moving_object.js`: this script will handle the movement schema for all following objects which extend to this module. Will also handle object collision.
 
 `Game_status.js`: this script  will house the necessary variables to provide feedback to user, as well as the prompts for game play.
+
+`Util.js`: this script will handle the calculations for distance guessing and checking between various objects rendered on DOM.
 
 ### Implementation Timeline
 
@@ -81,6 +84,8 @@ In addition to the webpack entry file, there will be six scripts involved in thi
 
 There are many directions this **Space Invaders** replica could eventually go.  Some anticipated updates are:
 
+- [ ] Have sounds accompanying actions and visuals
+- [ ] A progress/level modal allowing the user move amp  up the difficulty/progress
 - [ ] Get realtime feedback for scores and wave clears
 - [ ] Increasing movement and fire-back rate from "Invaders"
 - [ ] Add options for different modes and player-limitations
