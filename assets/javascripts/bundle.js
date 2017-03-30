@@ -89,16 +89,6 @@ const Util = {
 
   scale (vec, m) {
     return [vec[0] * m, vec[1] * m];
-  },
-
-  wrap (coordinate, max) {
-    if (coordinate < 0) {
-      return max - (coordinate % max);
-    } else if (coordinate > max) {
-      return coordinate % max;
-    } else {
-      return coordinate;
-    }
   }
 };
 
@@ -174,9 +164,9 @@ const NORMAL_FRAME_TIME_DELTA = 1000/60;
 class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
   constructor(options) {
 
-    options.pos = [options.pos[0] + 10, options.pos[1]];
-    options.height = ammo.HEIGHT;
-    options.width = ammo.WIDTH;
+    options.pos = [options.pos[0] + 10, options.pos[1] - 10];
+    options.height = Projectile.HEIGHT;
+    options.width = Projectile.WIDTH;
     options.color = "#5B95B7";
     options.vel = [0, -3];
 
@@ -184,10 +174,8 @@ class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
   }
 }
 
-const ammo = {
-  HEIGHT: 10,
-  WIDTH: 10
-};
+Projectile.HEIGHT = 10;
+Projectile.WIDTH = 10;
 
 /* harmony default export */ __webpack_exports__["a"] = (Projectile);
 
@@ -218,6 +206,7 @@ class Game {
   }
 
   add(object) {
+
     if (object instanceof __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]) {
       this.invaders.push(object);
     } else if (object instanceof __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */] ) {
@@ -225,33 +214,34 @@ class Game {
     } else if (object instanceof __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]) {
       this.spaceCrafts.push(object);
     } else {
-      throw "Error: unknown object";
+      throw "Error: Attempted to add unknown object";
     }
+
   }
 
   addInvaders() {
+
     for (let i = 0; i < Game.NUM_INVADERS; i++) {
       this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
     }
+
   }
 
   addSpaceCraft() {
+
+    let centerScreen = [Game.DIM_X / 2, 650];
+
     const spaceCraft = new __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]({
-      pos: this.startPosition(),
+      pos: centerScreen,
       game: this
     });
 
     this.add(spaceCraft);
 
     return spaceCraft;
+
   }
 
-  startPosition () {
-    return [
-      Game.DIM_X / 2,
-      650
-    ];
-  }
 
   allObjects() {
     return [].concat(this.spaceCrafts, this.invaders, this.projectiles);
@@ -274,16 +264,27 @@ class Game {
 
   randomPosition() {
     return [
-      Game.DIM_X * Math.random(),
+      Game.DIM_X / 4 + Math.random() * Game.DIM_X / 2,
       0
     ];
+  }
+
+  remove(object) {
+    if (object instanceof __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */]) {
+      this.projectiles.splice(this.projectiles.indexOf(object), 1);
+    } else if (object instanceof __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]) {
+      this.invaders.splice(this.invaders.indexOf(object), 1);
+    } else if (object instanceof __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]) {
+      this.spaceCrafts.slice(this.spaceCrafts.indexOf(object), 1);
+    } else {
+      throw "Error: removal of unknown object.";
+    }
   }
 
   draw(ctxt) {
     const pattern = ctxt.createPattern(Game.BackGround, 'no-repeat');
     ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     ctxt.fillStyle = pattern;
-    // ctxt.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
 
     this.allObjects().forEach((object) => {
       object.draw(ctxt);
@@ -306,6 +307,7 @@ class Game {
 Game.BackGround = document.getElementById("infiniwars");
 Game.DIM_X = 450;
 Game.DIM_Y = 700;
+Game.NUM_INVADERS = 10;
 
 /* harmony default export */ __webpack_exports__["a"] = (Game);
 
@@ -323,26 +325,22 @@ class GameView {
   }
 
   bindKeyHandlers(){
-    const spaceCraft = this.spaceCraft;
 
     window.addEventListener('keydown', event => {
       if (event.keyCode === 37) {
-        console.log("left");
-        spaceCraft.power("left");
+        this.spaceCraft.power("left");
       } else if (event.keyCode === 39) {
-        console.log("right");
-        spaceCraft.power("right");
+        this.spaceCraft.power("right");
       } else if (event.keyCode === 32) {
-        console.log("firing");
-        spaceCraft.fireProjectile();
+        this.spaceCraft.fireProjectile();
       }
     });
 
     window.addEventListener('keyup', event => {
       if (event.keyCode === 37 ) {
-        spaceCraft.power("reset");
+        this.spaceCraft.power("reset");
       } else if (event.keyCode === 39) {
-        spaceCraft.power("reset");
+        this.spaceCraft.power("reset");
       }
     });
   }
@@ -404,13 +402,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-
-
 const INVADER = {
-  COLOR: "#182730",
+  COLOR: "#5B95B7",
   WIDTH: 20,
   HEIGHT: 20,
-  VEL: [0, 4]
+  VEL: [0, 2]
 };
 
 class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
@@ -420,12 +416,13 @@ class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* defaul
     options.width = INVADER.WIDTH;
     options.height = INVADER.HEIGHT;
     options.vel = options.vel || INVADER.VEL;
-    debugger;
     super(options);
   }
 
   collideWith(otherObject) {
     if (otherObject instanceof __WEBPACK_IMPORTED_MODULE_1__spacecraft__["a" /* default */]) {
+      this.remove();
+      otherObject.remove();
       return true;
     } else if (otherObject instanceof __WEBPACK_IMPORTED_MODULE_2__projectile__["a" /* default */]) {
       this.remove();
@@ -486,10 +483,11 @@ class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
   }
 
   power(impulse) {
+
     if (impulse === "right") {
-      this.vel = [1, 0];
+      this.vel = [2, 0];
     } else if (impulse === "left") {
-      this.vel = [-1, 0];
+      this.vel = [-2, 0];
     } else {
       this.vel = [0, 0];
     }
