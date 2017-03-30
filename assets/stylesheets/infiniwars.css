@@ -21,7 +21,6 @@ time, mark, audio, video {
 
 body {
   background-color: black;
-  max-width: 1000px;
 
 }
 
@@ -36,11 +35,19 @@ body {
   text-shadow: 5px 5px deepskyblue;
   display: flex;
   flex-direction: column;
-  margin: 20% auto;
-
+  margin: 0 auto;
+  text-align: center;
 }
 
 canvas {
   background-image: url("https://media.giphy.com/media/2C8Kf24dnrYNW/giphy.gif");
-
 }
+
+/*
+Color Palette:
+5B95B7
+557A90
+28536C
+0D3F5D
+182730
+*/

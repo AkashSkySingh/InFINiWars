@@ -87,11 +87,6 @@ const Util = {
     return Util.dist([0,0], vector);
   },
 
-  randomVec (length) {
-    const deg = 2 * Math.PI * Math.random();
-    return Util.scale([Math.sin(deg), Math.cos(deg)], length);
-  },
-
   scale (vec, m) {
     return [vec[0] * m, vec[1] * m];
   },
@@ -182,7 +177,7 @@ class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
     options.pos = [options.pos[0] + 10, options.pos[1]];
     options.height = ammo.HEIGHT;
     options.width = ammo.WIDTH;
-    options.color = "#ffffff";
+    options.color = "#5B95B7";
     options.vel = [0, -3];
 
     super(options);
@@ -277,11 +272,18 @@ class Game {
     }
   }
 
+  randomPosition() {
+    return [
+      Game.DIM_X * Math.random(),
+      0
+    ];
+  }
+
   draw(ctxt) {
     const pattern = ctxt.createPattern(Game.BackGround, 'no-repeat');
     ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     ctxt.fillStyle = pattern;
-    ctxt.fill();
+    // ctxt.fillRect(0, 0, Game.DIM_X, Game.DIM_Y);
 
     this.allObjects().forEach((object) => {
       object.draw(ctxt);
@@ -392,8 +394,44 @@ document.addEventListener("DOMContentLoaded", () => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class Invader {
-  constructor(game, center){
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_object__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spacecraft__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__projectile__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__util__);
+
+
+
+
+
+
+
+const INVADER = {
+  COLOR: "#182730",
+  WIDTH: 20,
+  HEIGHT: 20,
+  VEL: [0, 4]
+};
+
+class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
+  constructor(options){
+    options.color = INVADER.COLOR;
+    options.pos = options.pos || options.game.randomPosition();
+    options.width = INVADER.WIDTH;
+    options.height = INVADER.HEIGHT;
+    options.vel = options.vel || INVADER.VEL;
+    debugger;
+    super(options);
+  }
+
+  collideWith(otherObject) {
+    if (otherObject instanceof __WEBPACK_IMPORTED_MODULE_1__spacecraft__["a" /* default */]) {
+      return true;
+    } else if (otherObject instanceof __WEBPACK_IMPORTED_MODULE_2__projectile__["a" /* default */]) {
+      this.remove();
+      otherObject.remove();
+      return true;
+    }
   }
 }
 
@@ -420,7 +458,7 @@ const spaceShip = {
 
 class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
   constructor(options) {
-    options.color = "#ff0000";
+    options.color = "#0D3F5D";
     options.height = spaceShip.HEIGHT;
     options.width = spaceShip.WIDTH;
     options.vel = options.vel || [0, 0];
