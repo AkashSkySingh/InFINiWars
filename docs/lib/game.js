@@ -151,7 +151,7 @@ class Game {
             this.add(new Invader({ game: this }));
           }
 
-        }, 1000
+        }, 500
       );
     }
   }

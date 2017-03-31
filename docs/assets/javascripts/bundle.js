@@ -135,13 +135,13 @@ class MovingObject {
   }
 
   move(timeDelta) {
-    const velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA,
-    offsetX = this.vel[0] * velocityScale,
-    offsetY = this.vel[1] * velocityScale;
+    if (!this.game.paused) {
+      const velocityScale = timeDelta / NORMAL_FRAME_TIME_DELTA,
+      offsetX = this.vel[0] * velocityScale,
+      offsetY = this.vel[1] * velocityScale;
 
-    this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
-    
-
+      this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
+    }
   }
 
   remove() {
@@ -425,7 +425,7 @@ class Game {
             this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
           }
 
-        }, 1000
+        }, 500
       );
     }
   }
