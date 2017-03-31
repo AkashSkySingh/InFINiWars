@@ -16,10 +16,10 @@ There are many variations on the **Space Invaders**.  This simulation will incor
 
 With this **Space Invaders** simulator, users will be able to:
 
-- [ ] Start and reset the game board
+- [x] Restart the game board
 - [x] Move "spacecraft" and fire at enemies
 - [x] "Invaders" which move towards "spacecraft"
-- [ ] See their score
+- [x] See their score
 
 In addition, this project will include:
 
