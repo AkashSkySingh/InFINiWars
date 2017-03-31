@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>InFINiWars</title>
+    <link rel="stylesheet" href="./assets/stylesheets/infiniwars.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Revalia" rel="stylesheet">
+    <script src="https://code.createjs.com/soundjs-0.6.2.min.js"></script>
+  </head>
+  <body>
+
+    <header>
+      <h1>InFINiWars!</h1>
+    </header>
+
+    <div id="root">
+      <div class="panels left">
+        <div class="description">
+          <h3>InFINiWars:</h3>
+          <p>
+            InFINiWars is at its core the game of Space Invaders.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score. This variation will change the enemy mechanic by making the player fight against an endless wave of enemies as they generate score. The player gets feedback the moment their ship is destroyed!
+          </p>
+        </div>
+
+      </div>
+
+      <div class="game">
+        <canvas id="infiniwars"></canvas>
+      </div>
+
+      <div class="panels right">
+        <div class="game-feed">
+          <div class="score">
+            <h3>Score:</h3>
+            <h4>PlaceHolder</h4>
+          </div>
+
+          <br/ >
+
+          <div class="commands">
+            <h3>Commands:</h3>
+            <div class="left-arrow">
+              <img src="https://vpnstaticip.com/guides/img/windows_openvpn/arrows.png" class="arrows" alt="arrows">
+              <h4>Left Arrow = Move Left</h4>
+              <h4>Right Arrow = Move Right</h4>
+            </div>
+            <br />
+            <div class="spacebars">
+              <img src="https://badmanthecancerkiller.neocities.org/assets/images/spacebar.png" alt="spacebar" class="spacebar">
+              <h4>SpaceBar = Fire!</h4>
+            </div>
+          </div>
+
+          <br/ >
+
+          <div class="options">
+            <h3>Options:</h3>
+            <button type="button" class="options-b">Restart</button>
+            <br />
+            <button type="button" class="options-b">Toggle Mute</button>
+            <br />
+          </div>
+
+        </div>
+
+
+        <script type="application/javascript" src="./assets/javascripts/bundle.js"></script>
+      </div>
+    </div>
+
+    <footer>
+      <ul>
+
+        <li><a href="https://www.linkedin.com/in/akashpreetsingh">LinkedIn</a>
+        </li>
+
+        <li><a href="https://www.akashpreetsingh.com">Portfolio</a>
+        </li>
+
+        <li><a href="https://github.com/AkashSkySingh/InFINiWars">GitHub</a>
+        </li>
+
+      </ul>
+    </footer>
+
+  </body>
+</html>

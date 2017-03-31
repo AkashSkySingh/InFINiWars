@@ -8,11 +8,9 @@ class MovingObject {
     this.width = options.width;
     this.color = options.color;
     this.game = options.game;
-    this.isWrappable = true;
   }
 
   collideWith(otherObject) {
-
   }
 
   draw(ctxt) {
@@ -34,7 +32,6 @@ class MovingObject {
     offsetY = this.vel[1] * velocityScale;
 
     this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
-
 
   }
 

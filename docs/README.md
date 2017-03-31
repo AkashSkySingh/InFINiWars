@@ -2,7 +2,7 @@
 
 ### Background
 
-InFINiWars is at its core the game of **Space Invaders**.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score.
+InFINiWars is at its core the game of **Space Invaders**.  The original game is an arcade style, 1 player space-themed shooter.  The player uses a ship, or token to destroy incoming waves of space invaders, either to complete a level and progress forward, or rack up a high score. This variation will change the enemy mechanic by making the player fight against an endless wave of enemies as they generate score. The player gets feedback the moment their ship is destroyed!
 
 In future developments, I plan to bring **Space Invaders** into the modern era by:
 
@@ -27,7 +27,7 @@ In addition, this project will include:
 
 ### Wireframes
 
-This app will consist of a single screen with game canvas, game controls, and nav links to the Github, my LinkedIn, and the About modal.  Game controls will include Start, Reset, and mute buttons.  On the left, there will be lore about the game, as well as the momvement schema.  On the right, there will be a livefeed for user progress, as well as the button overlay for features mentioned above.  Additionally, the game will have a modal  appear prompting to continue game.
+This app will consist of a single screen with game canvas, game controls, and nav links to the Github, my LinkedIn, and the About modal.  Game controls will include Start, Reset, and mute buttons.  On the left, there will be lore about the game, as well as the movement schema.  On the right, there will be a live feed for user progress, as well as the button overlay for features mentioned above.  Additionally, the game will have a modal  appear prompting to continue game.
 
 ![wireframes](./docs/wireframes/InFINiWars.png)
 
