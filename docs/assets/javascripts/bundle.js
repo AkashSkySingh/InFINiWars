@@ -407,27 +407,26 @@ class Game {
     ctxt.fillStyle = pattern;
     document.getElementById("score").innerHTML = this.score;
 
-    if (!this.paused) {
-      this.allObjects().forEach((object) => {
-        object.draw(ctxt);
-        this.gameOver(ctxt);
-      });
 
-      window.setInterval(
-        () => {
-          this.invaders.forEach((invader) => {
-            if (invader.pos[1] > 700) {
-              invader.pos = this.randomPosition();
-            }
-          });
+    this.allObjects().forEach((object) => {
+      object.draw(ctxt);
+      this.gameOver(ctxt);
+    });
 
-          for (let i = this.invaders.length; i < Game.NUM_INVADERS; i++) {
-            this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
+    window.setInterval(
+      () => {
+        this.invaders.forEach((invader) => {
+          if (invader.pos[1] > 700) {
+            invader.pos = this.randomPosition();
           }
+        });
 
-        }, 500
-      );
-    }
+        for (let i = this.invaders.length; i < Game.NUM_INVADERS; i++) {
+          this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
+        }
+
+      }, 500
+    );
   }
 
   step(delta) {
