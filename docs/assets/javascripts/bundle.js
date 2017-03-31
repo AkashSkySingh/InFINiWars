@@ -580,7 +580,7 @@ const INVADER = {
   COLOR: "#5B95B7",
   WIDTH: 80,
   HEIGHT: 30,
-  VEL: [0, 2]
+  VEL: [0, 1.5]
 };
 
 class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
