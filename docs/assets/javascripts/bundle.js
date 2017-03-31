@@ -125,9 +125,13 @@ class MovingObject {
     ctxt.fill();
   }
 
+  faceCheck() {
+    return [(this.pos[0] + this.width/2), (this.pos[1])];
+  }
+
   hasCollidedWith(otherObject) {
-    const centerDist = __WEBPACK_IMPORTED_MODULE_0__util___default.a.dist(this.pos, otherObject.pos);
-    return centerDist < (this.radius + otherObject.radius);
+    const centerDist = __WEBPACK_IMPORTED_MODULE_0__util___default.a.dist(this.faceCheck(), otherObject.faceCheck());
+    return centerDist < (this.width/2 + otherObject.width/2);
   }
 
   move(timeDelta) {
@@ -161,7 +165,7 @@ const NORMAL_FRAME_TIME_DELTA = 1000/60;
 class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
   constructor(options) {
 
-    options.pos = [options.pos[0] + 10, options.pos[1] - 10];
+    options.pos = [options.pos[0] + 15, options.pos[1] - 30];
     options.height = Projectile.HEIGHT;
     options.width = Projectile.WIDTH;
     options.color = "#5B95B7";
@@ -169,10 +173,18 @@ class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
 
     super(options);
   }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("projectile"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
+  }
 }
 
-Projectile.HEIGHT = 10;
-Projectile.WIDTH = 10;
+Projectile.HEIGHT = 40;
+Projectile.WIDTH = 20;
 
 /* harmony default export */ __webpack_exports__["a"] = (Projectile);
 
@@ -191,8 +203,8 @@ Projectile.WIDTH = 10;
 
 
 const spaceShip = {
-  WIDTH: 30,
-  HEIGHT: 30
+  WIDTH: 50,
+  HEIGHT: 50
 };
 
 class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
@@ -235,6 +247,14 @@ class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
     }
   }
 
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("spaceship"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
+  }
+
 }
 
 
@@ -259,11 +279,17 @@ class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
 class Game {
 
   constructor() {
+    this.setUpGame();
+  }
+
+  setUpGame() {
     this.invaders = [];
     this.projectiles = [];
     this.spaceCrafts = [];
-
+    this.score = 0;
     this.addInvaders();
+    this.paused = false;
+    this.gameOverState = false;
   }
 
   add(object) {
@@ -280,6 +306,14 @@ class Game {
 
   }
 
+  togglePause() {
+    if (this.paused) {
+      this.paused = false;
+    } else {
+      this.paused = true;
+    }
+  }
+
   addInvaders() {
 
     for (let i = 0; i < Game.NUM_INVADERS; i++) {
@@ -291,24 +325,25 @@ class Game {
   addSpaceCraft() {
 
     let centerScreen = [Game.DIM_X / 2, 650];
-
     const spaceCraft = new __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]({
       pos: centerScreen,
       game: this
     });
 
     this.add(spaceCraft);
-
     return spaceCraft;
 
   }
 
 
   allObjects() {
+
     return [].concat(this.spaceCrafts, this.invaders, this.projectiles);
+
   }
 
   checkCollisions() {
+
     const allObjects = this.allObjects();
     for (let i=0; i < allObjects.length; i++) {
       for (let j=0; j < allObjects.length; j++){
@@ -317,26 +352,49 @@ class Game {
 
         if (obj1.hasCollidedWith(obj2)) {
           const collision = obj1.collideWith(obj2);
-          if (collision) return;
+          if (collision) {
+            this.updateScore(obj1, obj2);
+          }
         }
       }
     }
   }
 
   randomPosition() {
+
     return [
       Game.DIM_X / 4 + Math.random() * Game.DIM_X / 2,
       -400 * Math.random()
     ];
+
+  }
+
+  updateScore(obj1, obj2) {
+
+    if (obj1 instanceof __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]
+      && obj2 instanceof __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */]){
+      if (!this.gameOverState) {
+        this.score = this.score + 100;
+      }
+    }
+
+  }
+
+  gameOver(ctxt) {
+    if (this.spaceCrafts.length === 0) {
+      ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+      this.gameOverState = true;
+    }
   }
 
   remove(object) {
+
     if (object instanceof __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */]) {
       this.projectiles.splice(this.projectiles.indexOf(object), 1);
     } else if (object instanceof __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]) {
       this.invaders.splice(this.invaders.indexOf(object), 1);
     } else if (object instanceof __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]) {
-      this.spaceCrafts.slice(this.spaceCrafts.indexOf(object), 1);
+      this.spaceCrafts.splice(this.spaceCrafts.indexOf(object), 1);
     } else {
       throw "Error: removal of unknown object.";
     }
@@ -346,9 +404,11 @@ class Game {
     const pattern = ctxt.createPattern(Game.BackGround, 'no-repeat');
     ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
     ctxt.fillStyle = pattern;
+    document.getElementById("score").innerHTML = this.score;
 
     this.allObjects().forEach((object) => {
       object.draw(ctxt);
+      this.gameOver(ctxt);
     });
 
     window.setInterval(
@@ -383,7 +443,7 @@ class Game {
 Game.BackGround = document.getElementById("infiniwars");
 Game.DIM_X = 450;
 Game.DIM_Y = 700;
-Game.NUM_INVADERS = 20;
+Game.NUM_INVADERS = 30;
 
 /* harmony default export */ __webpack_exports__["a"] = (Game);
 
@@ -393,6 +453,9 @@ Game.NUM_INVADERS = 20;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(4);
+
+
 class GameView {
   constructor(game, ctxt) {
     this.ctxt = ctxt;
@@ -402,29 +465,53 @@ class GameView {
 
   bindKeyHandlers(){
 
-    window.addEventListener('keydown', event => {
+    this.keyDownListeners = window.addEventListener('keydown', event => {
       if (event.keyCode === 37) {
         this.spaceCraft.power("left");
       } else if (event.keyCode === 39) {
         this.spaceCraft.power("right");
       } else if (event.keyCode === 32) {
         this.spaceCraft.fireProjectile();
+      } else if (event.keyCode === 66) {
+        this.game.togglePause();
       }
     });
 
-    window.addEventListener('keyup', event => {
+    this.keyUpListeners = window.addEventListener('keyup', event => {
       if (event.keyCode === 37 ) {
         this.spaceCraft.power("reset");
       } else if (event.keyCode === 39) {
         this.spaceCraft.power("reset");
       }
     });
+
+    let restartb = document.getElementById("restart");
+    this.restartListener = restartb.addEventListener("click", this.restart.bind(this));
   }
 
-  start() {
-    this.bindKeyHandlers();
+  unbindKeyHandlers() {
+    debugger;
+    document.removeEventListener('keydown', this.keyDownListeners);
+    document.removeEventListener('keyup', this.keyUpListeners);
+
+    let restartb = document.getElementById("restart");
+    restartb.removeEventListener('click', this.restartListener);
+  }
+
+
+  start(bind) {
+    if (bind) {
+      this.bindKeyHandlers();
+    }
     this.lastTime = 0;
     requestAnimationFrame(this.animate.bind(this));
+  }
+
+  restart() {
+    this.unbindKeyHandlers();
+    this.game = new __WEBPACK_IMPORTED_MODULE_0__game__["a" /* default */]();
+    this.spaceCraft = this.game.addSpaceCraft();
+    this.start(false);
   }
 
   animate(time) {
@@ -458,8 +545,10 @@ document.addEventListener("DOMContentLoaded", () => {
   canvasElem.height = __WEBPACK_IMPORTED_MODULE_0__game__["a" /* default */].DIM_Y;
 
   const ctxt = canvasElem.getContext("2d");
-  const game = new __WEBPACK_IMPORTED_MODULE_0__game__["a" /* default */]();
-  new __WEBPACK_IMPORTED_MODULE_1__game_view__["a" /* default */](game, ctxt).start();
+  let game = new __WEBPACK_IMPORTED_MODULE_0__game__["a" /* default */]();
+
+  new __WEBPACK_IMPORTED_MODULE_1__game_view__["a" /* default */](game, ctxt).start(true);
+
 });
 
 
@@ -480,8 +569,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const INVADER = {
   COLOR: "#5B95B7",
-  WIDTH: 20,
-  HEIGHT: 20,
+  WIDTH: 80,
+  HEIGHT: 30,
   VEL: [0, 2]
 };
 
@@ -505,6 +594,14 @@ class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* defaul
       otherObject.remove();
       return true;
     }
+  }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("invader"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
   }
 }
 

@@ -53,14 +53,14 @@ h3 {
   color: white;
   text-shadow: 1px 1px deepskyblue;
   padding: 20px;
-  font-size: 18px;
+  font-size: 24px;
 }
 
 h4 {
   font-family: 'Droid Sans', sans-serif;
   color: white;
   text-shadow: 1px 1px deepskyblue;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .panels {
@@ -113,6 +113,8 @@ div div img {
   width: 100px;
 }
 
+
+
 .options {
   height: 150px;
 }
@@ -140,8 +142,10 @@ canvas {
   background-image: url("http://res.cloudinary.com/nightstock/image/upload/s--mM57ycOR--/v1490933567/canvasbg_yheffb.gif");
 }
 
+/* Sprite Related CSS */
 
-
+.sprites img {
+}
 
 /* Footer Related CSS */
 
@@ -187,4 +191,7 @@ spacecraft: http://res.cloudinary.com/nightstock/image/upload/s--6n99tnfy--/v149
 
 invader:
 http://res.cloudinary.com/nightstock/image/upload/s--DR8t80cJ--/v1490933567/Mothership_tze1ai.png
+
+projectile:
+http://res.cloudinary.com/nightstock/image/upload/s--bN9vqtkO--/v1490972545/rocket-146109_640_tk7oi1.png
 */

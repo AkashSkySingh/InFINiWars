@@ -3,7 +3,7 @@ import MovingObject from './moving_object';
 class Projectile extends MovingObject {
   constructor(options) {
 
-    options.pos = [options.pos[0] + 10, options.pos[1] - 10];
+    options.pos = [options.pos[0] + 15, options.pos[1] - 30];
     options.height = Projectile.HEIGHT;
     options.width = Projectile.WIDTH;
     options.color = "#5B95B7";
@@ -11,9 +11,17 @@ class Projectile extends MovingObject {
 
     super(options);
   }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("projectile"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
+  }
 }
 
-Projectile.HEIGHT = 10;
-Projectile.WIDTH = 10;
+Projectile.HEIGHT = 40;
+Projectile.WIDTH = 20;
 
 export default Projectile;

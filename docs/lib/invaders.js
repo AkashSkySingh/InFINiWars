@@ -5,8 +5,8 @@ import Util from "./util";
 
 const INVADER = {
   COLOR: "#5B95B7",
-  WIDTH: 20,
-  HEIGHT: 20,
+  WIDTH: 80,
+  HEIGHT: 30,
   VEL: [0, 2]
 };
 
@@ -30,6 +30,14 @@ class Invader extends MovingObject {
       otherObject.remove();
       return true;
     }
+  }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("invader"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
   }
 }
 

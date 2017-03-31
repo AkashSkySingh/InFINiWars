@@ -21,9 +21,13 @@ class MovingObject {
     ctxt.fill();
   }
 
+  faceCheck() {
+    return [(this.pos[0] + this.width/2), (this.pos[1])];
+  }
+
   hasCollidedWith(otherObject) {
-    const centerDist = Util.dist(this.pos, otherObject.pos);
-    return centerDist < (this.radius + otherObject.radius);
+    const centerDist = Util.dist(this.faceCheck(), otherObject.faceCheck());
+    return centerDist < (this.width/2 + otherObject.width/2);
   }
 
   move(timeDelta) {

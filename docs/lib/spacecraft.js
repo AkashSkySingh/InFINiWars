@@ -3,8 +3,8 @@ import Projectile from "./projectile";
 import Util from "./util";
 
 const spaceShip = {
-  WIDTH: 30,
-  HEIGHT: 30
+  WIDTH: 50,
+  HEIGHT: 50
 };
 
 class spaceCraft extends MovingObject {
@@ -45,6 +45,14 @@ class spaceCraft extends MovingObject {
     } else {
       this.vel = [0, 0];
     }
+  }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("spaceship"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
   }
 
 }

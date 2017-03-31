@@ -32,7 +32,7 @@
         <div class="game-feed">
           <div class="box score">
             <h3>Score:</h3>
-            <h4>PlaceHolder</h4>
+            <h4 id="score"></h4>
           </div>
 
           <br/ >
@@ -40,14 +40,19 @@
           <div class="box commands">
             <h3>Commands:</h3>
             <div class="left-arrow">
-              <img src="http://res.cloudinary.com/nightstock/image/upload/s--74uM3GVh--/v1490933552/arrows_amlftd.png" class="arrows" alt="arrows">
+              <img src="https://res.cloudinary.com/nightstock/image/upload/s--74uM3GVh--/v1490933552/arrows_amlftd.png" class="arrows" alt="arrows">
               <h4>Left Arrow = Move Left</h4>
               <h4>Right Arrow = Move Right</h4>
             </div>
             <br />
             <div class="spacebars">
-              <img src="http://res.cloudinary.com/nightstock/image/upload/s--uEZbeicL--/v1490933556/spacebar_yvchet.png" alt="spacebar" class="spacebar">
+              <img src="https://res.cloudinary.com/nightstock/image/upload/s--uEZbeicL--/v1490933556/spacebar_yvchet.png" alt="spacebar" class="spacebar">
               <h4>SpaceBar = Fire!</h4>
+            </div>
+            <by />
+            <div class="b-button">
+              <img src="http://icons.iconarchive.com/icons/chromatix/keyboard-keys/128/letter-b-icon.png" alt="bbutton">
+              <h4>B Key = Toggle Pause</h4>
             </div>
           </div>
 
@@ -55,7 +60,7 @@
 
           <div class="box options">
             <h3>Options:</h3>
-            <button type="button" class="options-b">Restart</button>
+            <button type="button" class="options-b" id="restart">Restart</button>
             <br />
             <button type="button" class="options-b">Toggle Mute</button>
             <br />
@@ -66,6 +71,12 @@
 
         <script type="application/javascript" src="./assets/javascripts/bundle.js"></script>
       </div>
+    </div>
+
+    <div  class="sprites" style="display:none">
+      <img src="https://res.cloudinary.com/nightstock/image/upload/s--6n99tnfy--/v1490933567/space-ship-spacecraft-forcies-star-wars-512_ffoen3.png" id="spaceship">
+      <img src="https://res.cloudinary.com/nightstock/image/upload/s--DR8t80cJ--/v1490933567/Mothership_tze1ai.png" id="invader">
+      <img src="https://res.cloudinary.com/nightstock/image/upload/s--bN9vqtkO--/v1490972545/rocket-146109_640_tk7oi1.png" id="projectile">
     </div>
 
     <footer>
