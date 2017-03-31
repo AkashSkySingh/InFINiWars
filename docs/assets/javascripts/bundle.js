@@ -140,6 +140,7 @@ class MovingObject {
     offsetY = this.vel[1] * velocityScale;
 
     this.pos = [this.pos[0] + offsetX, this.pos[1] + offsetY];
+    
 
   }
 
@@ -406,25 +407,27 @@ class Game {
     ctxt.fillStyle = pattern;
     document.getElementById("score").innerHTML = this.score;
 
-    this.allObjects().forEach((object) => {
-      object.draw(ctxt);
-      this.gameOver(ctxt);
-    });
+    if (!this.paused) {
+      this.allObjects().forEach((object) => {
+        object.draw(ctxt);
+        this.gameOver(ctxt);
+      });
 
-    window.setInterval(
-      () => {
-        this.invaders.forEach((invader) => {
-          if (invader.pos[1] > 700) {
-            invader.pos = this.randomPosition();
+      window.setInterval(
+        () => {
+          this.invaders.forEach((invader) => {
+            if (invader.pos[1] > 700) {
+              invader.pos = this.randomPosition();
+            }
+          });
+
+          for (let i = this.invaders.length; i < Game.NUM_INVADERS; i++) {
+            this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
           }
-        });
 
-        for (let i = this.invaders.length; i < Game.NUM_INVADERS; i++) {
-          this.add(new __WEBPACK_IMPORTED_MODULE_0__invaders__["a" /* default */]({ game: this }));
-        }
-
-      }, 1000
-    );
+        }, 1000
+      );
+    }
   }
 
   step(delta) {
@@ -461,11 +464,12 @@ class GameView {
     this.ctxt = ctxt;
     this.game = game;
     this.spaceCraft = this.game.addSpaceCraft();
+    this.restart = this.restart.bind(this);
   }
 
   bindKeyHandlers(){
 
-    this.keyDownListeners = window.addEventListener('keydown', event => {
+    this.keyDownListeners = event => {
       if (event.keyCode === 37) {
         this.spaceCraft.power("left");
       } else if (event.keyCode === 39) {
@@ -475,27 +479,31 @@ class GameView {
       } else if (event.keyCode === 66) {
         this.game.togglePause();
       }
-    });
+    };
 
-    this.keyUpListeners = window.addEventListener('keyup', event => {
+    window.addEventListener('keydown', this.keyDownListeners);
+
+    this.keyUpListeners = event => {
       if (event.keyCode === 37 ) {
         this.spaceCraft.power("reset");
       } else if (event.keyCode === 39) {
         this.spaceCraft.power("reset");
       }
-    });
+    };
+
+    window.addEventListener('keyup', this.keyUpListeners);
 
     let restartb = document.getElementById("restart");
-    this.restartListener = restartb.addEventListener("click", this.restart.bind(this));
+    restartb.addEventListener("click", this.restart);
   }
 
   unbindKeyHandlers() {
-    debugger;
-    document.removeEventListener('keydown', this.keyDownListeners);
-    document.removeEventListener('keyup', this.keyUpListeners);
+
+    window.removeEventListener('keydown', this.keyDownListeners);
+    window.removeEventListener('keyup', this.keyUpListeners);
 
     let restartb = document.getElementById("restart");
-    restartb.removeEventListener('click', this.restartListener);
+    restartb.removeEventListener('click', this.restart);
   }
 
 
@@ -504,14 +512,15 @@ class GameView {
       this.bindKeyHandlers();
     }
     this.lastTime = 0;
-    requestAnimationFrame(this.animate.bind(this));
+    this.animationRequest = requestAnimationFrame(this.animate.bind(this));
   }
 
   restart() {
     this.unbindKeyHandlers();
+    window.cancelAnimationFrame(this.animationRequest);
     this.game = new __WEBPACK_IMPORTED_MODULE_0__game__["a" /* default */]();
     this.spaceCraft = this.game.addSpaceCraft();
-    this.start(false);
+    this.start(true);
   }
 
   animate(time) {

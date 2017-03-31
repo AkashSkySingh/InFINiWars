@@ -5,11 +5,12 @@ class GameView {
     this.ctxt = ctxt;
     this.game = game;
     this.spaceCraft = this.game.addSpaceCraft();
+    this.restart = this.restart.bind(this);
   }
 
   bindKeyHandlers(){
 
-    this.keyDownListeners = window.addEventListener('keydown', event => {
+    this.keyDownListeners = event => {
       if (event.keyCode === 37) {
         this.spaceCraft.power("left");
       } else if (event.keyCode === 39) {
@@ -19,27 +20,31 @@ class GameView {
       } else if (event.keyCode === 66) {
         this.game.togglePause();
       }
-    });
+    };
 
-    this.keyUpListeners = window.addEventListener('keyup', event => {
+    window.addEventListener('keydown', this.keyDownListeners);
+
+    this.keyUpListeners = event => {
       if (event.keyCode === 37 ) {
         this.spaceCraft.power("reset");
       } else if (event.keyCode === 39) {
         this.spaceCraft.power("reset");
       }
-    });
+    };
+
+    window.addEventListener('keyup', this.keyUpListeners);
 
     let restartb = document.getElementById("restart");
-    this.restartListener = restartb.addEventListener("click", this.restart.bind(this));
+    restartb.addEventListener("click", this.restart);
   }
 
   unbindKeyHandlers() {
-    debugger;
-    document.removeEventListener('keydown', this.keyDownListeners);
-    document.removeEventListener('keyup', this.keyUpListeners);
+
+    window.removeEventListener('keydown', this.keyDownListeners);
+    window.removeEventListener('keyup', this.keyUpListeners);
 
     let restartb = document.getElementById("restart");
-    restartb.removeEventListener('click', this.restartListener);
+    restartb.removeEventListener('click', this.restart);
   }
 
 
@@ -48,14 +53,15 @@ class GameView {
       this.bindKeyHandlers();
     }
     this.lastTime = 0;
-    requestAnimationFrame(this.animate.bind(this));
+    this.animationRequest = requestAnimationFrame(this.animate.bind(this));
   }
 
   restart() {
     this.unbindKeyHandlers();
+    window.cancelAnimationFrame(this.animationRequest);
     this.game = new Game();
     this.spaceCraft = this.game.addSpaceCraft();
-    this.start(false);
+    this.start(true);
   }
 
   animate(time) {
