@@ -124,7 +124,7 @@ h4 {
 }
 
 .options {
-  height: 150px;
+  height: 200px;
 }
 
 .options-b {
@@ -149,7 +149,7 @@ canvas {
   margin: 0 auto;
   /*background-image: url("http://res.cloudinary.com/nightstock/image/upload/s--mM57ycOR--/v1490933567/canvasbg_yheffb.gif");*/
   /*background-color: inherit;*/
-  background-image: url("https://images8.alphacoders.com/397/397989.jpg");
+  background-image: url("http://orig08.deviantart.net/bedc/f/2014/187/e/4/blue_space_background__looks_the_same_as_the_rest__by_darkdissolution-d7pgwmn.png");
   background-size: cover;
 }
 
