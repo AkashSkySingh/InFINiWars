@@ -73,7 +73,7 @@ class Game {
   randomPosition() {
     return [
       Game.DIM_X / 4 + Math.random() * Game.DIM_X / 2,
-      0
+      -400 * Math.random()
     ];
   }
 
@@ -97,6 +97,21 @@ class Game {
     this.allObjects().forEach((object) => {
       object.draw(ctxt);
     });
+
+    window.setInterval(
+      () => {
+        this.invaders.forEach((invader) => {
+          if (invader.pos[1] > 700) {
+            invader.pos = this.randomPosition();
+          }
+        });
+
+        for (let i = this.invaders.length; i < Game.NUM_INVADERS; i++) {
+          this.add(new Invader({ game: this }));
+        }
+
+      }, 1000
+    );
   }
 
   step(delta) {
@@ -115,6 +130,6 @@ class Game {
 Game.BackGround = document.getElementById("infiniwars");
 Game.DIM_X = 450;
 Game.DIM_Y = 700;
-Game.NUM_INVADERS = 10;
+Game.NUM_INVADERS = 20;
 
 export default Game;
