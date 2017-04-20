@@ -27,7 +27,7 @@ class MovingObject {
 
   hasCollidedWith(otherObject) {
     const centerDist = Util.dist(this.faceCheck(), otherObject.faceCheck());
-    return centerDist < (this.width/2 + otherObject.width/2);
+    return centerDist < (this.width/3.75 + otherObject.width/3.75);
   }
 
   move(timeDelta) {

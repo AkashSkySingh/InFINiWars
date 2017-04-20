@@ -7,7 +7,7 @@ class Projectile extends MovingObject {
     options.height = Projectile.HEIGHT;
     options.width = Projectile.WIDTH;
     options.color = "#5B95B7";
-    options.vel = [0, -3];
+    options.vel = [0, -4];
 
     super(options);
   }

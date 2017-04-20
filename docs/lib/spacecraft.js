@@ -39,9 +39,9 @@ class spaceCraft extends MovingObject {
   power(impulse) {
 
     if (impulse === "right") {
-      this.vel = [2, 0];
+      this.vel = [3, 0];
     } else if (impulse === "left") {
-      this.vel = [-2, 0];
+      this.vel = [-3, 0];
     } else {
       this.vel = [0, 0];
     }

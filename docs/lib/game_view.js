@@ -6,6 +6,7 @@ class GameView {
     this.game = game;
     this.spaceCraft = this.game.addSpaceCraft();
     this.restart = this.restart.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   bindKeyHandlers(){
@@ -36,6 +37,11 @@ class GameView {
 
     let restartb = document.getElementById("restart");
     restartb.addEventListener("click", this.restart);
+    restartb.blur();
+
+    let startb = document.getElementById("start");
+    startb.addEventListener("click", this.startGame);
+    startb.blur();
   }
 
   unbindKeyHandlers() {
@@ -45,6 +51,9 @@ class GameView {
 
     let restartb = document.getElementById("restart");
     restartb.removeEventListener('click', this.restart);
+
+    let startb = document.getElementById("start");
+    startb.removeEventListener("click", this.startGame);
   }
 
 
@@ -54,6 +63,12 @@ class GameView {
     }
     this.lastTime = 0;
     this.animationRequest = requestAnimationFrame(this.animate.bind(this));
+  }
+
+  startGame() {
+    this.game.paused = false;
+    let startb = document.getElementById("start");
+    startb.blur();
   }
 
   restart() {

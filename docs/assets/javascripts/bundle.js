@@ -6,9 +6,9 @@
 /******/ 	function __webpack_require__(moduleId) {
 /******/
 /******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
+/******/ 		if(installedModules[moduleId]) {
 /******/ 			return installedModules[moduleId].exports;
-/******/
+/******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
@@ -131,7 +131,7 @@ class MovingObject {
 
   hasCollidedWith(otherObject) {
     const centerDist = __WEBPACK_IMPORTED_MODULE_0__util___default.a.dist(this.faceCheck(), otherObject.faceCheck());
-    return centerDist < (this.width/2 + otherObject.width/2);
+    return centerDist < (this.width/3.75 + otherObject.width/3.75);
   }
 
   move(timeDelta) {
@@ -170,7 +170,7 @@ class Projectile extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* def
     options.height = Projectile.HEIGHT;
     options.width = Projectile.WIDTH;
     options.color = "#5B95B7";
-    options.vel = [0, -3];
+    options.vel = [0, -4];
 
     super(options);
   }
@@ -195,81 +195,9 @@ Projectile.WIDTH = 20;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_object__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projectile__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__util__);
-
-
-
-
-const spaceShip = {
-  WIDTH: 50,
-  HEIGHT: 50
-};
-
-class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
-  constructor(options) {
-    options.color = "#0D3F5D";
-    options.height = spaceShip.HEIGHT;
-    options.width = spaceShip.WIDTH;
-    options.vel = options.vel || [0, 0];
-    super(options);
-  }
-
-  fireProjectile() {
-    const norm = __WEBPACK_IMPORTED_MODULE_2__util___default.a.norm(this.vel);
-
-    const relativeVelocity = __WEBPACK_IMPORTED_MODULE_2__util___default.a.scale(
-      __WEBPACK_IMPORTED_MODULE_2__util___default.a.dir(this.vel),
-      __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */].SPEED
-    );
-
-    const projectileVelocity = [
-      relativeVelocity[0] + this.vel[0], relativeVelocity[1] + this.vel[1]
-    ];
-
-    const projectile = new __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */]({
-      pos: this.pos,
-      game: this.game
-    });
-
-    this.game.add(projectile);
-  }
-
-  power(impulse) {
-
-    if (impulse === "right") {
-      this.vel = [2, 0];
-    } else if (impulse === "left") {
-      this.vel = [-2, 0];
-    } else {
-      this.vel = [0, 0];
-    }
-  }
-
-  draw(ctxt) {
-    ctxt.drawImage(document.getElementById("spaceship"),
-      this.pos[0],
-      this.pos[1],
-      this.width,
-      this.height);
-  }
-
-}
-
-
-/* harmony default export */ __webpack_exports__["a"] = (spaceCraft);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__invaders__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projectile__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spacecraft__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__spacecraft__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__util__);
 
@@ -288,8 +216,7 @@ class Game {
     this.projectiles = [];
     this.spaceCrafts = [];
     this.score = 0;
-    this.addInvaders();
-    this.paused = false;
+    this.paused = true;
     this.gameOverState = false;
   }
 
@@ -315,6 +242,10 @@ class Game {
     }
   }
 
+  startGame() {
+    this.paused = false;
+  }
+
   addInvaders() {
 
     for (let i = 0; i < Game.NUM_INVADERS; i++) {
@@ -325,7 +256,7 @@ class Game {
 
   addSpaceCraft() {
 
-    let centerScreen = [Game.DIM_X / 2, 650];
+    let centerScreen = [Game.DIM_X / 2, 550];
     const spaceCraft = new __WEBPACK_IMPORTED_MODULE_2__spacecraft__["a" /* default */]({
       pos: centerScreen,
       game: this
@@ -364,7 +295,7 @@ class Game {
   randomPosition() {
 
     return [
-      Game.DIM_X / 4 + Math.random() * Game.DIM_X / 2,
+      0 + Math.random() * Game.DIM_X / 1.2,
       -400 * Math.random()
     ];
 
@@ -416,7 +347,7 @@ class Game {
     window.setInterval(
       () => {
         this.invaders.forEach((invader) => {
-          if (invader.pos[1] > 700) {
+          if (invader.pos[1] > 600) {
             invader.pos = this.randomPosition();
           }
         });
@@ -444,10 +375,82 @@ class Game {
 
 Game.BackGround = document.getElementById("infiniwars");
 Game.DIM_X = 450;
-Game.DIM_Y = 700;
-Game.NUM_INVADERS = 30;
+Game.DIM_Y = 600;
+Game.NUM_INVADERS = 25;
 
 /* harmony default export */ __webpack_exports__["a"] = (Game);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_object__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__projectile__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__util__);
+
+
+
+
+const spaceShip = {
+  WIDTH: 50,
+  HEIGHT: 50
+};
+
+class spaceCraft extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {
+  constructor(options) {
+    options.color = "#0D3F5D";
+    options.height = spaceShip.HEIGHT;
+    options.width = spaceShip.WIDTH;
+    options.vel = options.vel || [0, 0];
+    super(options);
+  }
+
+  fireProjectile() {
+    const norm = __WEBPACK_IMPORTED_MODULE_2__util___default.a.norm(this.vel);
+
+    const relativeVelocity = __WEBPACK_IMPORTED_MODULE_2__util___default.a.scale(
+      __WEBPACK_IMPORTED_MODULE_2__util___default.a.dir(this.vel),
+      __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */].SPEED
+    );
+
+    const projectileVelocity = [
+      relativeVelocity[0] + this.vel[0], relativeVelocity[1] + this.vel[1]
+    ];
+
+    const projectile = new __WEBPACK_IMPORTED_MODULE_1__projectile__["a" /* default */]({
+      pos: this.pos,
+      game: this.game
+    });
+
+    this.game.add(projectile);
+  }
+
+  power(impulse) {
+
+    if (impulse === "right") {
+      this.vel = [3, 0];
+    } else if (impulse === "left") {
+      this.vel = [-3, 0];
+    } else {
+      this.vel = [0, 0];
+    }
+  }
+
+  draw(ctxt) {
+    ctxt.drawImage(document.getElementById("spaceship"),
+      this.pos[0],
+      this.pos[1],
+      this.width,
+      this.height);
+  }
+
+}
+
+
+/* harmony default export */ __webpack_exports__["a"] = (spaceCraft);
 
 
 /***/ }),
@@ -455,7 +458,7 @@ Game.NUM_INVADERS = 30;
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(3);
 
 
 class GameView {
@@ -464,6 +467,7 @@ class GameView {
     this.game = game;
     this.spaceCraft = this.game.addSpaceCraft();
     this.restart = this.restart.bind(this);
+    this.startGame = this.startGame.bind(this);
   }
 
   bindKeyHandlers(){
@@ -494,6 +498,11 @@ class GameView {
 
     let restartb = document.getElementById("restart");
     restartb.addEventListener("click", this.restart);
+    restartb.blur();
+
+    let startb = document.getElementById("start");
+    startb.addEventListener("click", this.startGame);
+    startb.blur();
   }
 
   unbindKeyHandlers() {
@@ -503,6 +512,9 @@ class GameView {
 
     let restartb = document.getElementById("restart");
     restartb.removeEventListener('click', this.restart);
+
+    let startb = document.getElementById("start");
+    startb.removeEventListener("click", this.startGame);
   }
 
 
@@ -512,6 +524,12 @@ class GameView {
     }
     this.lastTime = 0;
     this.animationRequest = requestAnimationFrame(this.animate.bind(this));
+  }
+
+  startGame() {
+    this.game.paused = false;
+    let startb = document.getElementById("start");
+    startb.blur();
   }
 
   restart() {
@@ -542,7 +560,7 @@ class GameView {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__game__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__game_view__ = __webpack_require__(5);
 
 
@@ -566,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__moving_object__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spacecraft__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__spacecraft__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__projectile__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__util___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__util__);
@@ -579,7 +597,7 @@ const INVADER = {
   COLOR: "#5B95B7",
   WIDTH: 80,
   HEIGHT: 30,
-  VEL: [0, 1.5]
+  VEL: [0, 1.35]
 };
 
 class Invader extends __WEBPACK_IMPORTED_MODULE_0__moving_object__["a" /* default */] {

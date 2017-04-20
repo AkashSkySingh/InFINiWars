@@ -14,8 +14,7 @@ class Game {
     this.projectiles = [];
     this.spaceCrafts = [];
     this.score = 0;
-    this.addInvaders();
-    this.paused = false;
+    this.paused = true;
     this.gameOverState = false;
   }
 
@@ -41,6 +40,10 @@ class Game {
     }
   }
 
+  startGame() {
+    this.paused = false;
+  }
+
   addInvaders() {
 
     for (let i = 0; i < Game.NUM_INVADERS; i++) {
@@ -51,7 +54,7 @@ class Game {
 
   addSpaceCraft() {
 
-    let centerScreen = [Game.DIM_X / 2, 650];
+    let centerScreen = [Game.DIM_X / 2, 550];
     const spaceCraft = new SpaceCraft({
       pos: centerScreen,
       game: this
@@ -90,7 +93,7 @@ class Game {
   randomPosition() {
 
     return [
-      Game.DIM_X / 4 + Math.random() * Game.DIM_X / 2,
+      0 + Math.random() * Game.DIM_X / 1.2,
       -400 * Math.random()
     ];
 
@@ -142,7 +145,7 @@ class Game {
     window.setInterval(
       () => {
         this.invaders.forEach((invader) => {
-          if (invader.pos[1] > 700) {
+          if (invader.pos[1] > 600) {
             invader.pos = this.randomPosition();
           }
         });
@@ -170,7 +173,7 @@ class Game {
 
 Game.BackGround = document.getElementById("infiniwars");
 Game.DIM_X = 450;
-Game.DIM_Y = 700;
-Game.NUM_INVADERS = 30;
+Game.DIM_Y = 600;
+Game.NUM_INVADERS = 25;
 
 export default Game;

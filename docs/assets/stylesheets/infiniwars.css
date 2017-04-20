@@ -52,7 +52,7 @@ h3 {
   font-family: 'Revalia', cursive;
   color: white;
   text-shadow: 1px 1px deepskyblue;
-  padding: 20px;
+  padding: 10px;
   font-size: 24px;
 }
 
@@ -71,13 +71,13 @@ h4 {
   max-width: 250px;
   min-width: 225px;
   width: 100%;
-  max-height: 700px;
+  max-height: 600px;
   margin: 0 auto;
   text-align: center;
   /*background-image: url("http://res.cloudinary.com/nightstock/image/upload/s--mvfgfDYL--/v1490933569/panelbg_hrykq9.gif");
   background-size: cover;*/
   /*background-color: inherit;*/
-  background-image: url("https://assets.wired.com/photos/w_2000/wp-content/uploads/2016/12/BSP_054.jpg");
+  background-image: url("https://res.cloudinary.com/nightstock/image/upload/s--Evozj95F--/v1492641893/BSP_054_mik5dv.jpg");
   background-size: cover;
 
 }
@@ -96,7 +96,7 @@ h4 {
 }
 
 .description {
-  height: 425px;
+  height: 360px;
 }
 
 .right {
@@ -106,11 +106,11 @@ h4 {
 }
 
 .score {
-  height: 100px;
+  height: 90px;
 }
 
 .commands {
-  height: 350px;
+  height: 330px;
 }
 
 .left-arrow img {
@@ -124,7 +124,7 @@ h4 {
 }
 
 .options {
-  height: 200px;
+  height: 100px;
 }
 
 .options-b {
@@ -136,6 +136,7 @@ h4 {
   font-family: 'Revalia', cursive;
   cursor: pointer;
   margin: 5px;
+  padding: 5px;
 }
 
 .options-b:hover {
@@ -149,7 +150,7 @@ canvas {
   margin: 0 auto;
   /*background-image: url("http://res.cloudinary.com/nightstock/image/upload/s--mM57ycOR--/v1490933567/canvasbg_yheffb.gif");*/
   /*background-color: inherit;*/
-  background-image: url("http://orig08.deviantart.net/bedc/f/2014/187/e/4/blue_space_background__looks_the_same_as_the_rest__by_darkdissolution-d7pgwmn.png");
+  background-image: url("https://res.cloudinary.com/nightstock/image/upload/s--XYgI3kNJ--/v1492646338/blue_space_background__looks_the_same_as_the_rest__by_darkdissolution-d7pgwmn_gppqei.png");
   background-size: cover;
 }
 
