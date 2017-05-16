@@ -130,6 +130,8 @@ class Game {
     }
   }
 
+
+  // addition of gameover text  and start/pause text can be done to background during draw phase. Failure to draw text is due to game not clearing state and drawing appropriate images/text on top of canvas
   draw(ctxt) {
     const pattern = ctxt.createPattern(Game.BackGround, 'no-repeat');
     ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
