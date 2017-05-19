@@ -146,12 +146,25 @@ h4 {
 
 /* Game Canvas Related CSS */
 
+.game {
+
+}
+
 canvas {
   margin: 0 auto;
   /*background-image: url("http://res.cloudinary.com/nightstock/image/upload/s--mM57ycOR--/v1490933567/canvasbg_yheffb.gif");*/
   /*background-color: inherit;*/
   background-image: url("https://res.cloudinary.com/nightstock/image/upload/s--XYgI3kNJ--/v1492646338/blue_space_background__looks_the_same_as_the_rest__by_darkdissolution-d7pgwmn_gppqei.png");
   background-size: cover;
+}
+
+#gameStartText {
+  /*font-family: 'Revalia', cursive;
+  color: white;
+  text-shadow: 1px 1px deepskyblue;
+  font-size: 30px;
+  margin: 0 auto;
+  padding: 0;*/
 }
 
 /* Sprite Related CSS */
