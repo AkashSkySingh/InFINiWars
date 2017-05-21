@@ -242,6 +242,19 @@ class Game {
     }
   }
 
+  // Create a helper function that injects the proper pause text in case the paused state is enabled.
+
+  gamePausedText(ctxt) {
+    if (this.paused) {
+      let text = document.getElementById("gameText");
+
+      // Clears previous text as previous pause state text was still shown
+      text.innerHTML = "";
+
+      // Potentially see if you can only render this if the paused state is enabled, potential to be shown post paused state shifted? 
+    }
+  }
+
   startGame() {
     this.paused = false;
   }
@@ -316,6 +329,22 @@ class Game {
     if (this.spaceCrafts.length === 0) {
       ctxt.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
       this.gameOverState = true;
+      // gameOverText(ctxt);
+    }
+  }
+
+  // Make a helper function that checks based on gameOverState and clears projected elements on game over screen. From then, introduce/inject the text that tells player to reset/start game, maybe add in a text that also mentions current achieved score?
+
+  gameOverText(ctxt) {
+    if (this,gameOverState) {
+      let text = document.getElementById("gameText");
+
+      // Clears previous text as previous pause state text was still shown
+      text.innerHTML = "";
+
+      // Possibly inject html code to provide proper spaced out text
+      text.innerHTML = "Game Over"
+
     }
   }
 
