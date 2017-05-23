@@ -66,7 +66,7 @@ class GameView {
   }
 
   startGame() {
-    this.game.paused = false;
+    this.game.startGame();
     let startb = document.getElementById("start");
     startb.blur();
   }

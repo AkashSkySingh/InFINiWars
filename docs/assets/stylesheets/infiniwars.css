@@ -147,7 +147,6 @@ h4 {
 /* Game Canvas Related CSS */
 
 .game {
-
 }
 
 canvas {
@@ -178,15 +177,27 @@ footer {
   min-width: 800px;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding-top: 20px;
 }
 
 footer ul {
   list-style: none;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
   margin: 0;
+  padding: 0;
+}
+
+footer ul li:nth-child(odd) {
+  max-width: 275px;
+  min-width: 250px;
+  width: 100%;
+}
+
+footer ul li:nth-child(even) {
+  max-width: 450px;
+  min-width: 450px;
+  width: 100%;
 }
 
 footer ul li a {
@@ -194,7 +205,9 @@ footer ul li a {
   color: white;
   text-shadow: 1px 1px deepskyblue;
   text-decoration: none;
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 /*
