@@ -149,28 +149,20 @@ class Game {
     });
 
     let context = Game.BackGround.getContext("2d");
+    context.fillStyle = "white";
+    context.font = "30px 'Revalia', cursive";
+    context.shadowColor = 'deepskyblue';
+    context.shadowBlur = 10;
 
     if (this.startState && (this.paused && !this.gameOverState)) {
-      context.fillStyle = "white";
-      context.font = "30px 'Revalia', cursive";
-      context.shadowColor = 'deepskyblue';
-      context.shadowBlur = 10;
       context.fillText("Game Paused", (Game.BackGround.width / 2) -  130, (Game.BackGround.height / 2));
     }
 
     if (!this.startState && (this.paused && !this.gameOverState)) {
-      context.fillStyle = "white";
-      context.font = "30px 'Revalia', cursive";
-      context.shadowColor = 'deepskyblue';
-      context.shadowBlur = 10;
       context.fillText("Press Start!", (Game.BackGround.width / 2) -  110, (Game.BackGround.height / 2));
     }
 
     if (this.gameOverState) {
-      context.fillStyle = "white";
-      context.font = "30px 'Revalia', cursive";
-      context.shadowColor = 'deepskyblue';
-      context.shadowBlur = 10;
       context.fillText("Game Over", (Game.BackGround.width / 2) - 105, (Game.BackGround.height / 2));
     }
 
