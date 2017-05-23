@@ -47,12 +47,14 @@ class spaceCraft extends MovingObject {
     }
 
 
-    // Spaceship dimension binding fails due to input timing delay. A player can hold down the movement button in this movement style superseding the set restrictions
+    // Spaceship dimension binding fails due to input timing delay. A player can hold down the movement button in this movement style superseding the set restrictions. Therefore no bounds set in place.
 
-    let futureSpot = this.pos[0] + this.vel[0];
-    if (futureSpot < 0 || futureSpot > 400) {
-      this.vel = [0, 0];
-    }
+    // let futureSpot = this.pos[0] + this.vel[0];
+    // if (futureSpot < 0) {
+    //   this.vel = [3, 0];
+    // } else if (futureSpot > 400) {
+    //   this.vel = [-3, 0];
+    // }
 
   }
 
